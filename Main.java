@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 
-
+//todo тестовый класс
 public class Main {
 
     public static void main(String[] args) throws IOException, SQLException, DAOException, NoSuchMethodException, ClassNotFoundException {
@@ -22,13 +22,13 @@ public class Main {
 
 
         //2019-08-06
-        Calendar calendar = Calendar.getInstance();
+       /* Calendar calendar = Calendar.getInstance();
         calendar.set(2019, Calendar.DECEMBER, 25);
         Date date = calendar.getTime();
 
         Calendar calendar2 = Calendar.getInstance();
         calendar2.set(2020, Calendar.JANUARY, 11);
-        Date date2 = calendar2.getTime();
+        Date date2 = calendar2.getTime();*/
 
         //Vacancy temp = new Vacancy(100,"temp+","temp+","temp@temp+",date,null,"temp@temp");
         //temp.setAnswer_date(date2);
