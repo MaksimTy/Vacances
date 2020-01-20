@@ -26,14 +26,13 @@ public final class ConnectionFactory {
      * @throws IOException
      * @throws SQLException
      */
-    private ConnectionFactory() throws IOException, SQLException {
+    private ConnectionFactory() throws IOException {
         props = getProperties();
         try {
             Class.forName(props.get("driver").toString());
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-      //  connection = DriverManager.getConnection(props.get("url").toString(), props);
     }
 
     /**
