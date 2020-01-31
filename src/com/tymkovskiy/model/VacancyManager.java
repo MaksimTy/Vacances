@@ -17,8 +17,10 @@ public class VacancyManager {
     /**
      * Default constructor
      */
-    public VacancyManager() {
-        this.vacancies = new ArrayList<>();
+    public VacancyManager() throws DAOException {
+        DAO dao = new DAO(this);
+        this.setBase(dao);
+        this.vacancies = this.getVacancies();
     }
 
     /**vacances     */
@@ -121,7 +123,7 @@ public class VacancyManager {
         return this.base;
     }
 
-    public void setBase(DAO base) {
+    private void setBase(DAO base) {
         this.base = base;
     }
 
