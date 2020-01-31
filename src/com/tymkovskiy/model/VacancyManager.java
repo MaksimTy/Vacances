@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -23,12 +24,14 @@ public class VacancyManager {
         this.vacancies = this.getVacancies();
     }
 
-    /**vacances     */
+    /**
+     * vacances
+     */
     private List<Vacancy> vacancies;
-    /**DAO class     */
+    /**
+     * DAO class
+     */
     private DAO base;
-    /**UI class     */
-    private UIVacances ui;
     private static Logger logger = Logger.getLogger(VacancyManager.class.getName());
 
 
@@ -70,7 +73,6 @@ public class VacancyManager {
         // TODO implement here ????????
     }
 
-
     /**
      * @param vacancies
      */
@@ -80,7 +82,6 @@ public class VacancyManager {
     }
 
     /**
-     *
      * @return
      * @throws DAOException
      */
@@ -88,7 +89,6 @@ public class VacancyManager {
         this.base.getAllVacancies();
         return this.vacancies;
     }
-
 
     /**
      * @param date
@@ -127,13 +127,26 @@ public class VacancyManager {
         this.base = base;
     }
 
-    public void showVacanciesInConsole(){
-        for (Vacancy vacancy: this.vacancies
-             ) {
+    public void showVacanciesInConsole() {
+        for (Vacancy vacancy : this.vacancies
+        ) {
             System.out.println(vacancy);
         }
     }
 
+    public int getLastId() throws DAOException {
+        return this.base.getLastId();
+    }
 
+    public int getFirstId() throws DAOException {
+        return this.base.getFirstId();
+    }
 
+    public List<String> getAnswersList() throws DAOException {
+        base.getAllVacancies();
+        return this.vacancies.stream().
+                map(x -> x.getAnswer()).
+                distinct().
+                collect(Collectors.toList());
+    }
 }
