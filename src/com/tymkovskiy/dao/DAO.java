@@ -28,6 +28,7 @@ public class DAO {
     private VacancyManager vacancyManager;
     private static Logger logger = Logger.getLogger(DAO.class.getName());
 
+
     /**
      * @param vacancy
      * @throws DAOException
@@ -44,7 +45,7 @@ public class DAO {
                 message = statement.isClosed() == false ? "statement is open." : "statement is close.";
                 logger.info(message);
                 /**id вакансии*/
-                statement.setInt(1, this.getNextId());
+                statement.setInt(1, this.getLastId() + 1);
                 logger.info(Integer.toString(vacancy.getId()));
                 /**наименование компании*/
                 if (vacancy.getCompany() == null) statement.setString(2, null);
@@ -128,7 +129,6 @@ public class DAO {
     }
 
     /**
-     *
      * @param date
      * @throws DAOException
      */
@@ -142,7 +142,6 @@ public class DAO {
     }
 
     /**
-     *
      * @param start
      * @param end
      * @throws DAOException
@@ -268,7 +267,6 @@ public class DAO {
     }
 
     /**
-     *
      * @param vacancy
      * @param sql
      * @return
@@ -323,7 +321,6 @@ public class DAO {
     }
 
     /**
-     *
      * @param sql
      * @throws DAOException
      */
@@ -378,12 +375,12 @@ public class DAO {
     }
 
     /**
-     * Метод возвращает id для нового объекта Vacancy.
+     * Метод возвращает максимальный id.
      *
-     * @return nextId
+     * @return lastId
      * @throws DAOException
      */
-    private int getNextId() throws DAOException {
+    public int getLastId() throws DAOException {
         logger.info("start...");
         String sql = "SELECT MAX(id) AS id FROM public.mail";
         int maxId = 0;
@@ -406,6 +403,38 @@ public class DAO {
             throw new DAOException("Cannot selected.");
         }
         logger.info(" is ended.");
-        return maxId + 1;
+        return maxId;
+    }
+
+    /**
+     * Метод возвращает минимальный id.
+     *
+     * @return firstId
+     * @throws DAOException
+     */
+    public int getFirstId() throws DAOException {
+        logger.info("start...");
+        String sql = "SELECT MIN(id) AS id FROM public.mail";
+        int minId = 0;
+        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
+            String message = connection.isClosed() == false ? "connection is open." : "connection is close.";
+            logger.info(message);
+            try (Statement statement = connection.createStatement()) {
+                message = statement.isClosed() == false ? "statement is open." : "statement is close.";
+                logger.info(message);
+                try (ResultSet resultSet = statement.executeQuery(sql)) {
+                    message = resultSet.isClosed() == false ? "resultSet is open." : "resultSet is close.";
+                    logger.info(message);
+                    while (resultSet.next()) {
+                        minId = resultSet.getInt("id");
+                    }
+                }
+            }
+        } catch (IOException | SQLException e) {
+            logger.warning("Error : " + e);
+            throw new DAOException("Cannot selected.");
+        }
+        logger.info(" is ended.");
+        return minId;
     }
 }
