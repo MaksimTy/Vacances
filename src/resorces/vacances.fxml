@@ -3,9 +3,11 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.Line?>
-<AnchorPane minHeight="660.0" minWidth="620.0" prefHeight="660.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8"
-            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tymkovskiy.ui.ControllerVacances">
+<?import javafx.scene.shape.*?>
+
+<AnchorPane minHeight="660.0" minWidth="620.0" prefHeight="660.0" prefWidth="620.0"
+            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.tymkovskiy.ui.ControllerVacances">
     <children>
         <MenuBar>
             <menus>
@@ -32,7 +34,7 @@
                 <HBox alignment="CENTER" prefWidth="100.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Label prefWidth="100.0" text="id"/>
-                        <Label prefWidth="485.0" text="Label"/>
+                        <Label prefWidth="485.0" text="" fx:id="id"/>
                     </children>
                     <VBox.margin>
                         <Insets/>
@@ -48,7 +50,7 @@
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0" HBox.hgrow="ALWAYS">
+                        <TextField prefWidth="485.0" HBox.hgrow="ALWAYS" fx:id="company" text="">
                             <HBox.margin>
                                 <Insets/>
                             </HBox.margin>
@@ -65,7 +67,7 @@
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0"/>
+                        <TextField prefWidth="485.0" fx:id="vacancy" text=""/>
                     </children>
                     <VBox.margin>
                         <Insets/>
@@ -78,7 +80,7 @@
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0"/>
+                        <TextField prefWidth="485.0" fx:id="mail"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -88,7 +90,7 @@
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0"/>
+                        <TextField prefWidth="485.0" fx:id="link"/>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
@@ -98,7 +100,7 @@
                                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                             </padding>
                         </Label>
-                        <DatePicker/>
+                        <DatePicker fx:id="dateRequest"/>
                     </children>
                     <padding>
                         <Insets bottom="5.0"/>
@@ -113,18 +115,15 @@
                                 <Insets bottom="5.0"/>
                             </padding>
                         </Label>
-                        <ScrollPane prefViewportHeight="8.0" prefViewportWidth="580.0" prefWidth="580.0"
-                                    VBox.vgrow="ALWAYS">
-                            <content>
-                                <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                          minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0"
-                                          prefWidth="574.0" scrollLeft="2.0" scrollTop="2.0">
-                                    <padding>
-                                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
-                                    </padding>
-                                </TextArea>
-                            </content>
-                        </ScrollPane>
+                        <Pane prefWidth="580.0" VBox.vgrow="ALWAYS">
+                            <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0"
+                                      prefWidth="574.0" scrollLeft="2.0" scrollTop="2.0" fx:id="message">
+                                <padding>
+                                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
+                                </padding>
+                            </TextArea>
+                        </Pane>
                     </children>
                     <VBox.margin>
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
@@ -147,7 +146,7 @@
                                         <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
                                     </padding>
                                 </Label>
-                                <ComboBox editable="true" prefHeight="25.0" prefWidth="191.0"/>
+                                <ComboBox editable="true" prefHeight="25.0" prefWidth="191.0" fx:id="answer"/>
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
@@ -158,7 +157,7 @@
                                         <Insets left="50.0"/>
                                     </padding>
                                 </Label>
-                                <DatePicker HBox.hgrow="ALWAYS"/>
+                                <DatePicker HBox.hgrow="ALWAYS" fx:id="dateAnswer"/>
                             </children>
                         </HBox>
                     </children>
