@@ -1,20 +1,11 @@
 package com.tymkovskiy.ui;
 
-import com.sun.javafx.binding.StringFormatter;
 import com.tymkovskiy.dao.DAOException;
 import com.tymkovskiy.model.Vacancy;
 import com.tymkovskiy.model.VacancyManager;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.util.StringConverter;
-
-import java.text.DateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.concurrent.Callable;
 
 public class ControllerVacances {
 
@@ -45,12 +36,44 @@ public class ControllerVacances {
     @FXML
     private Button front;
     @FXML
+    private Button add;
+    @FXML
     private Button save;
 
 
     public void initialize() throws DAOException {
         this.vacancyManager = new VacancyManager();
         Vacancy vacancy = this.vacancyManager.getVacancyById(10);
+        this.setFields(vacancy);
+    }
+
+    @FXML
+    public void setBackButtonClick(ActionEvent actionEvent) throws DAOException {
+        int id = Integer.parseInt(this.id.getText()) - 1;
+        setFields(this.vacancyManager.getVacancyById(id));
+    }
+
+    @FXML
+    public void setFrontButtonClick(ActionEvent event) throws DAOException {
+        int id = Integer.parseInt(this.id.getText()) + 1;
+        setFields(this.vacancyManager.getVacancyById(id));
+    }
+
+    @FXML
+    public void setAddBottonClick(ActionEvent actionEvent) throws DAOException {
+          }
+
+    @FXML
+    public void setSaveBottonClick(ActionEvent event) {
+    }
+
+    /**
+     * Метод инициализирует поля формы значениями
+     * полей вакансии
+     *
+     * @param vacancy вакансия
+     */
+    private void setFields(Vacancy vacancy) {
         this.id.setText(String.valueOf(vacancy.getId()));
         this.company.setText(vacancy.getCompany());
         this.vacancy.setText((vacancy.getVacancy()));
@@ -62,8 +85,6 @@ public class ControllerVacances {
         this.answer.getEditor().setText(vacancy.getAnswer());
         this.dateAnswer.setValue(
                 Convertor.convertDateToLocalDate(vacancy.getAnswer_date()));
-
-
     }
 
 

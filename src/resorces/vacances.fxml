@@ -1,140 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane minHeight="660.0" minWidth="620.0" prefHeight="660.0" prefWidth="620.0"
-            xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.tymkovskiy.ui.ControllerVacances">
+<AnchorPane minHeight="660.0" minWidth="620.0" prefHeight="660.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tymkovskiy.ui.ControllerVacances">
     <children>
         <MenuBar>
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Close"/>
+                        <MenuItem mnemonicParsing="false" text="Close" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Delete"/>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About"/>
+                        <MenuItem mnemonicParsing="false" text="About" />
                     </items>
                 </Menu>
             </menus>
         </MenuBar>
-        <VBox alignment="CENTER" layoutX="6.0" layoutY="25.0" prefHeight="259.0" prefWidth="590.0" spacing="5.0"
-              AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
+        <VBox alignment="CENTER" layoutX="6.0" layoutY="25.0" prefHeight="259.0" prefWidth="590.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="30.0">
             <children>
                 <HBox alignment="CENTER" prefWidth="100.0" VBox.vgrow="ALWAYS">
                     <children>
-                        <Label prefWidth="100.0" text="id"/>
-                        <Label prefWidth="485.0" text="" fx:id="id"/>
+                        <Label prefWidth="100.0" text="id" />
+                        <Label fx:id="id" prefWidth="485.0" text="" />
                     </children>
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                     <padding>
-                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                     </padding>
                 </HBox>
                 <HBox alignment="CENTER" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Label prefWidth="100.0" text="company">
                             <padding>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0" HBox.hgrow="ALWAYS" fx:id="company" text="">
+                        <TextField fx:id="company" prefWidth="485.0" text="" HBox.hgrow="ALWAYS">
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                         </TextField>
                     </children>
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                 </HBox>
                 <HBox alignment="CENTER" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Label prefWidth="100.0" text="vacancy">
                             <padding>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0" fx:id="vacancy" text=""/>
+                        <TextField fx:id="vacancy" prefWidth="485.0" text="" />
                     </children>
                     <VBox.margin>
-                        <Insets/>
+                        <Insets />
                     </VBox.margin>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label prefWidth="100.0" text="mail">
                             <padding>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0" fx:id="mail"/>
+                        <TextField fx:id="mail" prefWidth="485.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label prefWidth="100.0" text="link" HBox.hgrow="ALWAYS">
                             <padding>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                             </padding>
                         </Label>
-                        <TextField prefWidth="485.0" fx:id="link"/>
+                        <TextField fx:id="link" prefWidth="485.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <Label prefWidth="100.0" text="date">
                             <padding>
-                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                             </padding>
                         </Label>
-                        <DatePicker fx:id="dateRequest"/>
+                        <DatePicker fx:id="dateRequest" />
                     </children>
                     <padding>
-                        <Insets bottom="5.0"/>
+                        <Insets bottom="5.0" />
                     </padding>
                 </HBox>
-                <Line endX="580.0" stroke="#070707" strokeLineJoin="ROUND"/>
-                <VBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="300.0" prefWidth="580.0" spacing="2.0"
-                      VBox.vgrow="ALWAYS">
+                <Line endX="580.0" stroke="#070707" strokeLineJoin="ROUND" />
+                <VBox alignment="CENTER_LEFT" minHeight="-Infinity" prefHeight="300.0" prefWidth="580.0" spacing="2.0" VBox.vgrow="ALWAYS">
                     <children>
                         <Label text="message">
                             <padding>
-                                <Insets bottom="5.0"/>
+                                <Insets bottom="5.0" />
                             </padding>
                         </Label>
                         <Pane prefWidth="580.0" VBox.vgrow="ALWAYS">
-                            <TextArea maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
-                                      minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0"
-                                      prefWidth="574.0" scrollLeft="2.0" scrollTop="2.0" fx:id="message">
-                                <padding>
-                                    <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
-                                </padding>
-                            </TextArea>
+                           <children>
+                               <TextArea fx:id="message" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="574.0" scrollLeft="2.0" scrollTop="2.0">
+                                   <padding>
+                                       <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                                   </padding>
+                               </TextArea>
+                           </children>
                         </Pane>
                     </children>
                     <VBox.margin>
-                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0"/>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                     </VBox.margin>
                     <padding>
-                        <Insets bottom="5.0" left="1.0" right="1.0" top="5.0"/>
+                        <Insets bottom="5.0" left="1.0" right="1.0" top="5.0" />
                     </padding>
                 </VBox>
                 <Line endX="580.0" stroke="#070707" strokeLineCap="BUTT" VBox.vgrow="ALWAYS">
                     <VBox.margin>
-                        <Insets left="1.0" right="1.0" top="1.0"/>
+                        <Insets left="1.0" right="1.0" top="1.0" />
                     </VBox.margin>
                 </Line>
                 <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -143,50 +140,54 @@
                             <children>
                                 <Label prefWidth="100.0" text="answer">
                                     <padding>
-                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                                        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
                                     </padding>
                                 </Label>
-                                <ComboBox editable="true" prefHeight="25.0" prefWidth="191.0" fx:id="answer"/>
+                                <ComboBox fx:id="answer" editable="true" prefHeight="25.0" prefWidth="191.0" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                             <children>
-                                <Label contentDisplay="TOP" prefHeight="17.0" prefWidth="114.0" text="date"
-                                       textAlignment="RIGHT">
+                                <Label contentDisplay="TOP" prefHeight="17.0" prefWidth="114.0" text="date" textAlignment="RIGHT">
                                     <padding>
-                                        <Insets left="50.0"/>
+                                        <Insets left="50.0" />
                                     </padding>
                                 </Label>
-                                <DatePicker HBox.hgrow="ALWAYS" fx:id="dateAnswer"/>
+                                <DatePicker fx:id="dateAnswer" HBox.hgrow="ALWAYS" />
                             </children>
                         </HBox>
                     </children>
                     <padding>
-                        <Insets bottom="5.0" top="5.0"/>
+                        <Insets bottom="5.0" top="5.0" />
                     </padding>
                 </HBox>
-                <Line endX="580.0" stroke="#070707" strokeLineCap="BUTT"/>
+                <Line endX="580.0" stroke="#070707" strokeLineCap="BUTT" />
                 <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                     <children>
-                        <Button mnemonicParsing="false" text="&lt;&lt;">
+                        <Button fx:id="back" mnemonicParsing="false" onAction="#setBackButtonClick" text="&lt;&lt;">
                             <HBox.margin>
-                                <Insets/>
+                                <Insets />
                             </HBox.margin>
                         </Button>
-                        <Button mnemonicParsing="false" text="&gt;&gt;"/>
-                        <Button mnemonicParsing="false" prefWidth="80.0" text="save" HBox.hgrow="ALWAYS">
+                        <Button fx:id="front" mnemonicParsing="false" onAction="#setFrontButtonClick" text="&gt;&gt;" />
+                        <Button mnemonicParsing="false" prefWidth="80.0" text="add" HBox.hgrow="ALWAYS" fx:id="add" onAction="#setAddBottonClick">
                             <HBox.margin>
-                                <Insets left="403.0"/>
+                                <Insets left="307.0" />
                             </HBox.margin>
                         </Button>
+                  <Button mnemonicParsing="false" prefWidth="80.0" text="save" HBox.hgrow="ALWAYS" fx:id="save" onAction="#setSaveBottonClick">
+                     <HBox.margin>
+                        <Insets right="5.0" />
+                     </HBox.margin>
+                  </Button>
                     </children>
                     <padding>
-                        <Insets bottom="5.0" top="5.0"/>
+                        <Insets bottom="5.0" top="5.0" />
                     </padding>
                 </HBox>
             </children>
             <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
             </padding>
         </VBox>
     </children>
