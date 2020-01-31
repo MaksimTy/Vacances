@@ -383,27 +383,7 @@ public class DAO {
     public int getLastId() throws DAOException {
         logger.info("start...");
         String sql = "SELECT MAX(id) AS id FROM public.mail";
-        int maxId = 0;
-        try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
-            String message = connection.isClosed() == false ? "connection is open." : "connection is close.";
-            logger.info(message);
-            try (Statement statement = connection.createStatement()) {
-                message = statement.isClosed() == false ? "statement is open." : "statement is close.";
-                logger.info(message);
-                try (ResultSet resultSet = statement.executeQuery(sql)) {
-                    message = resultSet.isClosed() == false ? "resultSet is open." : "resultSet is close.";
-                    logger.info(message);
-                    while (resultSet.next()) {
-                        maxId = resultSet.getInt("id");
-                    }
-                }
-            }
-        } catch (IOException | SQLException e) {
-            logger.warning("Error : " + e);
-            throw new DAOException("Cannot selected.");
-        }
-        logger.info(" is ended.");
-        return maxId;
+        return selectId(sql);
     }
 
     /**
@@ -415,7 +395,11 @@ public class DAO {
     public int getFirstId() throws DAOException {
         logger.info("start...");
         String sql = "SELECT MIN(id) AS id FROM public.mail";
-        int minId = 0;
+        return selectId(sql);
+    }
+
+    private int selectId(String sql) throws DAOException {
+        int id = 0;
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
             String message = connection.isClosed() == false ? "connection is open." : "connection is close.";
             logger.info(message);
@@ -426,7 +410,7 @@ public class DAO {
                     message = resultSet.isClosed() == false ? "resultSet is open." : "resultSet is close.";
                     logger.info(message);
                     while (resultSet.next()) {
-                        minId = resultSet.getInt("id");
+                        id = resultSet.getInt("id");
                     }
                 }
             }
@@ -435,6 +419,8 @@ public class DAO {
             throw new DAOException("Cannot selected.");
         }
         logger.info(" is ended.");
-        return minId;
+        return id;
     }
+
+
 }
