@@ -26,7 +26,8 @@ public class UIVacances extends Application {
 
         scene.getStylesheets().add(
                 UIVacances.class.
-                        getResource("/style.css").toExternalForm());
+                        getResource("/style.css").
+                        toExternalForm());
 
         stage.setWidth(620);
         stage.setMinWidth(620);

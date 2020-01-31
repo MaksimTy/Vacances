@@ -1,5 +1,5 @@
 .root {
-     -fx-background-image: url("background.jpg");
+     -fx-background-image: url("business.jpg");
 }
 
 .label {
@@ -33,5 +33,13 @@
 .button:hover {
  -fx-background-color: linear-gradient(#2A5058, #61a2b1);
  }
+
+#canselButton{
+-fx-background-color: linear-gradient(red, red);
+}
+
+#line{
+-fx-stroke: black;
+}
 
 
