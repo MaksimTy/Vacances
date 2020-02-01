@@ -152,4 +152,19 @@ public class Vacancy {
                 ", answer_date=" + answer_date +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vacancy)) return false;
+        Vacancy vacancy1 = (Vacancy) o;
+        return id == vacancy1.id &&
+                company.equals(vacancy1.company) &&
+                vacancy.equals(vacancy1.vacancy);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, company, vacancy);
+    }
 }
