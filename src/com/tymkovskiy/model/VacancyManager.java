@@ -40,6 +40,7 @@ public class VacancyManager {
      */
     public void addVacancy(Vacancy vacancy) throws DAOException {
         this.base.insertVacancy(vacancy);
+        this.base.getAllVacancies();
     }
 
     /**
@@ -50,6 +51,7 @@ public class VacancyManager {
      */
     public void deleteVacancy(int id) throws SQLException, IOException, DAOException {
         this.base.deleteVacancy(id);
+        this.base.getAllVacancies();
     }
 
     /**
@@ -57,6 +59,7 @@ public class VacancyManager {
      */
     public void updateVacancy(Vacancy vacancy) throws DAOException {
         this.base.updateVacancy(vacancy);
+        this.base.getAllVacancies();
     }
 
     /**

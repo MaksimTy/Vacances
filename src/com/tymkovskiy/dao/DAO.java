@@ -241,6 +241,7 @@ public class DAO {
     public void deleteVacancy(int id) throws DAOException {
         logger.info("start...");
         String sql = "DELETE FROM public.mail WHERE id=" + id;
+        Vacancy vacancy = this.getVacancyById(id);
 
         try (Connection connection = ConnectionFactory.getInstance().getConnection()) {
             String message = connection.isClosed() == false ? "connection is open." : "connection is close.";
@@ -249,8 +250,8 @@ public class DAO {
                 message = statement.isClosed() == false ? "statement is open." : "statement is close.";
                 logger.info(message);
                 boolean isDeleted = statement.execute(sql);
-                message = isDeleted ? "vacancy  deleted!" : "vacancy not deleted!";
-                logger.info(message);
+                message = isDeleted ? " vacancy  deleted!" : " vacancy not deleted!";
+                logger.info(vacancy.toString() + message);
                 if (isDeleted) {
                     logger.info(message);
                 } else {
@@ -363,7 +364,7 @@ public class DAO {
                             vacancy.setAnswer_date(answer_date);
                         }
                         vacancies.add(vacancy);
-                        logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
+                       // logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
                     }
                     this.vacancyManager.setVacancies(vacancies);
                 }

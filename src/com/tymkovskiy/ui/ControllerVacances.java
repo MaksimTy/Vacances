@@ -12,10 +12,15 @@ import javafx.scene.control.*;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.List;
 
 public class ControllerVacances {
 
-    public VacancyManager vacancyManager;
+    private VacancyManager vacancyManager;
+    /**
+     * Вакансия, карточка которой открыта в форме момент.
+     */
+    private Vacancy currentVacancy;
 
 
     @FXML
@@ -51,51 +56,55 @@ public class ControllerVacances {
     private Button create;
     @FXML
     private Button save;
-    @FXML
-    private Button delete;
+
 
     /**
      * Метод инициализирует поля формы значениями последнего объекта
      * Vacancy с максимальным id.
+     *
      * @throws DAOException
      */
     public void initialize() throws DAOException {
         this.vacancyManager = new VacancyManager();
         Vacancy vacancy = this.vacancyManager.getVacancyById(this.vacancyManager.getLastId());
-        this.setFields(vacancy);
+        this.currentVacancy = vacancy;
+        this.setFields(this.currentVacancy);
         ObservableList<String> answers = FXCollections.observableArrayList(this.vacancyManager.getAnswersList());
         this.answer.setItems(answers);
+
     }
 
     @FXML
     public void setStartButtonClick(ActionEvent actionEvent) throws DAOException {
         int id = this.vacancyManager.getFirstId();
-        this.setFields(this.vacancyManager.getVacancyById(id));
+        this.currentVacancy = this.vacancyManager.getVacancyById(id);
+        this.setFields(this.currentVacancy);
     }
 
     @FXML
     public void setBackButtonClick(ActionEvent actionEvent) throws DAOException {
-        int id = Integer.parseInt(this.id.getText()) - 1;
-        this.setFields(this.vacancyManager.getVacancyById(id));
+        int id = -1;
+        oneStepAlongVacancies(id);
     }
 
     @FXML
     public void setFrontButtonClick(ActionEvent actionEvent) throws DAOException {
-        int id = Integer.parseInt(this.id.getText()) + 1;
-        this.setFields(this.vacancyManager.getVacancyById(id));
+        int id = 1;
+        oneStepAlongVacancies(id);
     }
 
     @FXML
     public void setEndButtonClick(ActionEvent actionEvent) throws DAOException {
         int id = this.vacancyManager.getLastId();
-        this.setFields(this.vacancyManager.getVacancyById(id));
+        this.currentVacancy = this.vacancyManager.getVacancyById(id);
+        this.setFields(this.currentVacancy);
     }
 
     @FXML
     public void setCanselButtonClick(ActionEvent actionEvent) throws DAOException {
         this.clearFields();
-        Vacancy vacancy = this.vacancyManager.getVacancyById(this.vacancyManager.getLastId());
-        this.setFields(vacancy);
+        this.currentVacancy = this.vacancyManager.getVacancyById(this.vacancyManager.getLastId());
+        this.setFields(this.currentVacancy);
         this.cansel.setVisible(false);
     }
 
@@ -108,16 +117,14 @@ public class ControllerVacances {
 
     @FXML
     public void setSaveButtonClick(ActionEvent actionEvent) throws DAOException {
-        Vacancy vacancy = this.parserVacancy();
         try {
-            int id = Integer.parseInt(this.id.getText());
-            System.out.println(id);
-            vacancy.setId(id);
-            this.vacancyManager.updateVacancy(vacancy);
+            this.setCurrentVacancy();
+            this.vacancyManager.updateVacancy(this.currentVacancy);
         } catch (NumberFormatException e) {
-            this.vacancyManager.addVacancy(vacancy);
+            this.vacancyManager.addVacancy(this.currentVacancy);
             this.clearFields();
             this.setFields(this.vacancyManager.getVacancyById(this.vacancyManager.getLastId()));
+            this.setCurrentVacancy();
         }
         this.cansel.setVisible(false);
     }
@@ -127,6 +134,8 @@ public class ControllerVacances {
         int id = Integer.parseInt(this.id.getText());
         this.vacancyManager.deleteVacancy(id);
         this.setFields(this.vacancyManager.getVacancyById(this.vacancyManager.getLastId()));
+        this.setCurrentVacancy();
+
     }
 
     /**
@@ -166,6 +175,7 @@ public class ControllerVacances {
 
     /**
      * Метод считывает значения полей формы возвращает объект Vacancy
+     *
      * @return Vacancy
      * @throws DAOException
      */
@@ -191,5 +201,27 @@ public class ControllerVacances {
         return result;
     }
 
+    /**
+     * Метод возвращает объект Vacancy из списка Vacancies со сдвигом
+     * на id и присваевает его полю this.carrentVacancy.
+     *
+     * @param id сдвиг
+     * @throws DAOException
+     */
+    private void oneStepAlongVacancies(int id) throws DAOException {
+        List<Vacancy> vacancies = this.vacancyManager.getVacancies();
+        id += vacancies.indexOf(this.currentVacancy);
+        this.setFields(vacancies.get(id));
+        this.currentVacancy = vacancies.get(id);
+    }
+
+    /**
+     * Метод инициализирует currentVacancy
+     */
+    private void setCurrentVacancy() throws DAOException {
+        this.currentVacancy = this.parserVacancy();
+        int id = Integer.parseInt(this.id.getText());
+        this.currentVacancy.setId(id);
+    }
 
 }
