@@ -2,7 +2,6 @@ package com.tymkovskiy.model;
 
 import com.tymkovskiy.dao.DAO;
 import com.tymkovskiy.dao.DAOException;
-import com.tymkovskiy.ui.UIVacances;
 
 import java.io.IOException;
 import java.sql.SQLException;
