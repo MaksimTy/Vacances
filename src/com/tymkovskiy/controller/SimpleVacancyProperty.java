@@ -4,12 +4,10 @@ package com.tymkovskiy.controller;
 import com.tymkovskiy.model.Vacancy;
 import javafx.beans.property.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
 
 public class SimpleVacancyProperty {
 
-    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     /**
      * id вакансии
@@ -30,7 +28,7 @@ public class SimpleVacancyProperty {
     /**
      * дата отправки резюме
      */
-    private StringProperty mail_date;
+    private ObjectProperty<LocalDate> mail_date;
     /**
      * текст сопроводительного письма
      */
@@ -46,7 +44,7 @@ public class SimpleVacancyProperty {
     /**
      * дата ответа компании
      */
-    private StringProperty answer_date;
+    private ObjectProperty<LocalDate> answer_date;
 
 
     public SimpleVacancyProperty(Vacancy vacancy) {
@@ -55,13 +53,12 @@ public class SimpleVacancyProperty {
         this.vacancy = new SimpleStringProperty(vacancy.getVacancy());
         this.mail = new SimpleStringProperty(vacancy.getMail());
         this.vacancy_linc = new SimpleStringProperty(vacancy.getVacancy_linc());
-
-        this.mail_date = vacancy.getMail_date() == null ?
-                null : new SimpleStringProperty(sdf.format(vacancy.getMail_date()));
+        this.mail_date = new SimpleObjectProperty<>(
+                Convertor.convertDateToLocalDate(vacancy.getMail_date()));
         this.text = new SimpleStringProperty(vacancy.getText());
         this.answer = new SimpleStringProperty(vacancy.getAnswer());
-        this.answer_date = vacancy.getAnswer_date() == null ?
-                null : new SimpleStringProperty(sdf.format(vacancy.getAnswer_date()));
+        this.answer_date = new SimpleObjectProperty<>(
+                Convertor.convertDateToLocalDate(vacancy.getAnswer_date()));
     }
 
     public int getId() {
@@ -96,11 +93,11 @@ public class SimpleVacancyProperty {
         return mail;
     }
 
-    public String getMail_date() {
+    public LocalDate getMail_date() {
         return mail_date.get();
     }
 
-    public StringProperty mail_dateProperty() {
+    public ObjectProperty<LocalDate> mail_dateProperty() {
         return mail_date;
     }
 
@@ -128,11 +125,11 @@ public class SimpleVacancyProperty {
         return vacancy_linc;
     }
 
-    public String getAnswer_date() {
+    public LocalDate getAnswer_date() {
         return answer_date.get();
     }
 
-    public StringProperty answer_dateProperty() {
+    public ObjectProperty<LocalDate> answer_dateProperty() {
         return answer_date;
     }
 }

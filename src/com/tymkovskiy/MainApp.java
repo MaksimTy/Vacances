@@ -24,13 +24,10 @@ public class MainApp extends Application {
 
         this.stage = stage;
         this.stage.setTitle("Vacancies");
-        //  stage.setWidth(620);
-        //  stage.setMinWidth(620);
-        //  stage.setHeight(660);
-        //  stage.setMinHeight(660);
+
         this.initRootLayout();
         this.showTableVacancies();
-     //this.showCardVacancy();
+       // this.showCardVacancy();
 
     }
 
@@ -55,6 +52,5 @@ public class MainApp extends Application {
         loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/CardVacancy.fxml"));
         AnchorPane anchorPane = (AnchorPane) loader.load();
         this.rootLayout.setRight(anchorPane);
-
     }
 }

@@ -1,5 +1,5 @@
 .root {
-     -fx-background-image: url("business.jpg");
+     -fx-background-image: url("paper.jpg");
 }
 
 .label {
@@ -28,6 +28,7 @@
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(#61a2b1, #2A5058);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+     -fx-background-image: url("metal.jpg");
 }
 
 .button:hover {
@@ -35,11 +36,28 @@
  }
 
 #canselButton{
--fx-background-color: linear-gradient(red, red);
+-fx-background-color: linear-gradient(red, yellow);
 }
 
 #line{
 -fx-stroke: black;
 }
 
+#bar{
+    -fx-bar-size: 90;
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
 
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+
+    }
+
+#bar:hover {
+ -fx-background-color: linear-gradient(yellow, red);
+ }
+
+#bar{
+ -fx-background-color: linear-gradient(red, yellow);
+ -fx-background-image: url("paper.jpg");}

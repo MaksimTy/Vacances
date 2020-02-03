@@ -1,30 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.geometry.*?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.shape.Circle?>
 <AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.tymkovskiy.controller.ControllerVacanciesTable">
     <children>
-        <TableView fx:id="tableView" editable="false" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="5.0"
-                   AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-            <columns>
-                <TableColumn fx:id="id" maxWidth="20.0" minWidth="15.0" prefWidth="20.0" resizable="false" text="id"/>
-                <TableColumn fx:id="company" prefWidth="100.0" text="company"/>
-                <TableColumn fx:id="vacancy" prefWidth="151.0" text="vacancy"/>
-                <TableColumn fx:id="mail" prefWidth="89.0" text="mail"/>
-                <TableColumn fx:id="link" prefWidth="100.0" text="link"/>
-                <TableColumn fx:id="dateRequest" maxWidth="75.0" minWidth="20.0" prefWidth="75.0" text="request"/>
-                <TableColumn fx:id="answer" maxWidth="75.0" minWidth="20.0" prefWidth="75.0" text="answer"/>
-                <TableColumn fx:id="dateAnswer" maxWidth="75.0" minWidth="20.0" prefWidth="75.0" text="date"/>
-            </columns>
-            <padding>
-                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-            </padding>
-        </TableView>
+        <BorderPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0"
+                    AnchorPane.topAnchor="5.0">
+            <top>
+                <VBox spacing="2.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="ALWAYS">
+                            <children>
+                                <Label contentDisplay="CENTER" minWidth="-Infinity" prefWidth="70.0" text="company"
+                                       HBox.hgrow="ALWAYS"/>
+                                <TextField fx:id="companyField" minWidth="100.0" prefWidth="250.0"/>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="5.0">
+                            <children>
+                                <Label contentDisplay="CENTER" minWidth="-Infinity" prefWidth="70.0" text="vacancy"
+                                       HBox.hgrow="ALWAYS"/>
+                                <TextField fx:id="vacancyField" minWidth="100.0" prefWidth="250.0"/>
+                            </children>
+                        </HBox>
+                        <HBox spacing="20.0">
+                            <children>
+                                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                    <children>
+                                        <Label contentDisplay="CENTER" minWidth="-Infinity" prefWidth="70.0" text="from"
+                                               HBox.hgrow="ALWAYS"/>
+                                        <DatePicker fx:id="fromField" minWidth="100.0"/>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                                    <children>
+                                        <Label alignment="CENTER" contentDisplay="CENTER" minWidth="-Infinity"
+                                               prefWidth="50.0" text="to"/>
+                                        <DatePicker fx:id="toField" minWidth="100.0"/>
+                                    </children>
+                                </HBox>
+                                <HBox alignment="CENTER_LEFT" spacing="20.0">
+                                    <children>
+                                        <Button fx:id="search" alignment="CENTER" minWidth="-Infinity"
+                                                mnemonicParsing="false" onAction="#setSearchButtonClick"
+                                                prefWidth="80.0" text="search" textAlignment="CENTER">
+                                            <HBox.margin>
+                                                <Insets/>
+                                            </HBox.margin>
+                                        </Button>
+                                        <Button fx:id="reset" minWidth="-Infinity" mnemonicParsing="false"
+                                                onAction="#setResetButtonClick" prefWidth="80.0" text="reset">
+                                            <shape>
+                                                <Circle radius="12.0"/>
+                                            </shape>
+                                        </Button>
+                                    </children>
+                                    <HBox.margin>
+                                        <Insets/>
+                                    </HBox.margin>
+                                </HBox>
+                            </children>
+                        </HBox>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </BorderPane.margin>
+                    <padding>
+                        <Insets bottom="2.0" left="2.0" right="2.0"/>
+                    </padding>
+                </VBox>
+            </top>
+            <center>
+                <TableView fx:id="tableView" editable="false" tableMenuButtonVisible="true"
+                           BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="id" maxWidth="30.0" minWidth="15.0" prefWidth="30.0" resizable="false"
+                                     text="id"/>
+                        <TableColumn fx:id="company" prefWidth="100.0" text="company"/>
+                        <TableColumn fx:id="vacancy" prefWidth="151.0" text="vacancy"/>
+                        <TableColumn fx:id="mail" prefWidth="89.0" text="mail"/>
+                        <TableColumn fx:id="link" prefWidth="100.0" text="link"/>
+                        <TableColumn fx:id="dateRequest" maxWidth="75.0" minWidth="20.0" prefWidth="75.0"
+                                     text="request"/>
+                        <TableColumn fx:id="answer" maxWidth="75.0" minWidth="20.0" prefWidth="75.0" text="answer"/>
+                        <TableColumn fx:id="dateAnswer" maxWidth="75.0" minWidth="20.0" prefWidth="75.0" text="date"/>
+                    </columns>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </TableView>
+            </center>
+        </BorderPane>
     </children>
     <padding>
         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
