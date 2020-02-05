@@ -21,6 +21,7 @@ public class ControllerVacancyCard {
      * Вакансия, карточка которой открыта в форме в данный момент.
      */
     private Vacancy currentVacancy;
+    private ControllerVacanciesTable controllerVacanciesTable;
 
     @FXML
     private Label id;
@@ -134,7 +135,6 @@ public class ControllerVacancyCard {
         this.vacancyManager.deleteVacancy(id);
         this.setFields(this.vacancyManager.getVacancyById(this.vacancyManager.getLastId()));
         this.setCurrentVacancy();
-
     }
 
     /**
@@ -197,6 +197,8 @@ public class ControllerVacancyCard {
         String text = this.message.getText();
         String link = this.link.getText();
         Vacancy result = new Vacancy(company, vacancy, mail, date, text, link);
+        result.setAnswer_date(Convertor.convertLocalDateToDate(this.dateAnswer.getValue()));
+        result.setAnswer(this.answer.getValue());
         return result;
     }
 
@@ -223,4 +225,12 @@ public class ControllerVacancyCard {
         this.currentVacancy.setId(id);
     }
 
+    public void setControllerVacanciesTable(ControllerVacanciesTable controllerVacanciesTable) {
+        this.controllerVacanciesTable = controllerVacanciesTable;
+    }
+
+    public void setCurrentVacancy(Vacancy currentVacancy) {
+        this.currentVacancy = currentVacancy;
+        this.setFields(this.currentVacancy); // todo
+    }
 }

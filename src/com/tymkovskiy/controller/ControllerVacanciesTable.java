@@ -1,7 +1,10 @@
 package com.tymkovskiy.controller;
 
 import com.tymkovskiy.dao.DAOException;
+import com.tymkovskiy.model.Vacancy;
 import com.tymkovskiy.model.VacancyManager;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +21,7 @@ public class ControllerVacanciesTable {
 
     private VacancyManager vacancyManager;
     private ObservableList<SimpleVacancyProperty> simpleVacancyProperties;
+    private ControllerVacancyCard controllerVacancyCard;
 
     @FXML
     private TableView<SimpleVacancyProperty> tableView;
@@ -88,6 +92,7 @@ public class ControllerVacanciesTable {
         this.clearFilter();
     }
 
+
     /**
      * Метод заполняет таблицу результатами поиска и заново заполняет
      * this.simpleVacancyProperties полным набором вакансий.
@@ -106,6 +111,15 @@ public class ControllerVacanciesTable {
         this.vacancyManager = new VacancyManager();
         this.setSimpleVacancyProperties();
         this.fillTable();
+        this.tableView.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> {
+                    try {
+                        System.out.println(vacancyManager.getVacancyById(newValue.getId()));
+                        controllerVacancyCard.setCurrentVacancy(vacancyManager.getVacancyById(newValue.getId()));
+                    } catch (DAOException e) {
+                        e.printStackTrace();
+                    }
+                });
     }
 
     /**
@@ -201,4 +215,7 @@ public class ControllerVacanciesTable {
         this.toField.getEditor().clear();
     }
 
+    public void setControllerVacancyCard(ControllerVacancyCard controllerVacancyCard) {
+        this.controllerVacancyCard = controllerVacancyCard;
+    }
 }
