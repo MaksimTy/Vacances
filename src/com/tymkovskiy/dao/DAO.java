@@ -1,7 +1,8 @@
 package com.tymkovskiy.dao;
 
 import com.tymkovskiy.model.Vacancy;
-import com.tymkovskiy.model.VacancyManager;
+import com.tymkovskiy.controller.VacancyManager;
+import com.tymkovskiy.util.Convertor;
 
 import java.io.IOException;
 import java.sql.*;
@@ -64,7 +65,10 @@ public class DAO {
                     statement.setDate(5, null);
                     logger.info("mail date : ");
                 } else {
-                    java.sql.Date date = new java.sql.Date(vacancy.getMail_date().getTime());
+                    java.sql.Date date = new java.sql.Date(
+                            Convertor.convertLocalDateToDate(
+                                    vacancy.getMail_date()).
+                                    getTime());
                     statement.setDate(5, date);
                     logger.info(sDateForm.format(vacancy.getMail_date()));
                 }
@@ -190,7 +194,10 @@ public class DAO {
                     statement.setDate(4, null);
                     logger.info("mail date : ");
                 } else {
-                    java.sql.Date date = new java.sql.Date(vacancy.getMail_date().getTime());
+                    java.sql.Date date = new java.sql.Date(
+                            Convertor.convertLocalDateToDate(
+                                    vacancy.getMail_date()).
+                                    getTime());
                     statement.setDate(4, date);
                     logger.info(sDateForm.format(vacancy.getMail_date()));
                 }
@@ -211,7 +218,10 @@ public class DAO {
                     statement.setDate(8, null);
                     logger.info("answer date : ");
                 } else {
-                    java.sql.Date date = new java.sql.Date(vacancy.getAnswer_date().getTime());
+                    java.sql.Date date = new java.sql.Date(
+                            Convertor.convertLocalDateToDate(
+                                    vacancy.getAnswer_date()).
+                                    getTime());
                     statement.setDate(8, date);
                     logger.info(sDateForm.format(vacancy.getAnswer_date()));
                 }
@@ -307,7 +317,7 @@ public class DAO {
                             vacancy.setAnswer(answer);
                         }
                         if (answer_date != null) {
-                            vacancy.setAnswer_date(answer_date);
+                            vacancy.setAnswer_date(Convertor.convertDateToLocalDate(answer_date));
                         }
 
                         logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
@@ -361,7 +371,7 @@ public class DAO {
                             vacancy.setAnswer(answer);
                         }
                         if (answer_date != null) {
-                            vacancy.setAnswer_date(answer_date);
+                            vacancy.setAnswer_date(Convertor.convertDateToLocalDate(answer_date));
                         }
                         vacancies.add(vacancy);
                        // logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
