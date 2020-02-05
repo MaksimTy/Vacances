@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Line?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0"
             prefWidth="620.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.tymkovskiy.controller.ControllerVacancyCard">
+            fx:controller="com.tymkovskiy.view.ControllerVacancyCard">
     <children>
         <VBox alignment="CENTER_LEFT" layoutX="6.0" layoutY="25.0" spacing="5.0" AnchorPane.bottomAnchor="5.0"
               AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">

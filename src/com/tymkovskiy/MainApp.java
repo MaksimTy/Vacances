@@ -1,7 +1,7 @@
 package com.tymkovskiy;
 
-import com.tymkovskiy.controller.ControllerVacanciesTable;
-import com.tymkovskiy.controller.ControllerVacancyCard;
+import com.tymkovskiy.view.ControllerVacanciesTable;
+import com.tymkovskiy.view.ControllerVacancyCard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -30,8 +30,8 @@ public class MainApp extends Application {
         this.stage.setTitle("Vacancies");
 
         this.initRootLayout();
-        this.showTableVacancies();
-        this.showCardVacancy();
+        this.showVacancyOverview();
+       // this.showVacancyEditDialog();
 
     }
 
@@ -44,20 +44,19 @@ public class MainApp extends Application {
         this.stage.show();
     }
 
-    public void showTableVacancies() throws IOException {
+    public void showVacancyOverview() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/TableVacancies.fxml"));
+        loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/VacancyOverview.fxml"));
         AnchorPane anchorPane = (AnchorPane) loader.load();
-        this.rootLayout.setLeft(anchorPane);
-        this.controllerVacanciesTable = loader.getController();
+        this.rootLayout.setCenter(anchorPane);
+
     }
 
-    public void showCardVacancy() throws IOException {
+    public void showVacancyEditDialog() throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/CardVacancy.fxml"));
+        loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/VacancyEditDialog.fxml"));
         AnchorPane anchorPane = (AnchorPane) loader.load();
         this.rootLayout.setRight(anchorPane);
-        this.controllerVacancyCard = loader.getController();
-        this.controllerVacancyCard.setControllerVacanciesTable(this.controllerVacanciesTable);
+
            }
 }

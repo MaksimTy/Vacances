@@ -1,7 +1,8 @@
-package com.tymkovskiy.model;
+package com.tymkovskiy.controller;
 
 import com.tymkovskiy.dao.DAO;
 import com.tymkovskiy.dao.DAOException;
+import com.tymkovskiy.model.Vacancy;
 
 import java.io.IOException;
 import java.sql.SQLException;

@@ -1,4 +1,4 @@
-package com.tymkovskiy.controller;
+package com.tymkovskiy.util;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

@@ -1,8 +1,9 @@
-package com.tymkovskiy.controller;
+package com.tymkovskiy.view;
 
 import com.tymkovskiy.dao.DAOException;
 import com.tymkovskiy.model.Vacancy;
-import com.tymkovskiy.model.VacancyManager;
+import com.tymkovskiy.controller.VacancyManager;
+import com.tymkovskiy.util.Convertor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -1,10 +1,8 @@
-package com.tymkovskiy.controller;
+package com.tymkovskiy.view;
 
 import com.tymkovskiy.dao.DAOException;
 import com.tymkovskiy.model.Vacancy;
-import com.tymkovskiy.model.VacancyManager;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import com.tymkovskiy.controller.VacancyManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,27 +18,27 @@ import java.util.stream.Collectors;
 public class ControllerVacanciesTable {
 
     private VacancyManager vacancyManager;
-    private ObservableList<SimpleVacancyProperty> simpleVacancyProperties;
+    private ObservableList<Vacancy> vacances;
     private ControllerVacancyCard controllerVacancyCard;
 
     @FXML
-    private TableView<SimpleVacancyProperty> tableView;
+    private TableView<Vacancy> tableView;
     @FXML
-    private TableColumn<SimpleVacancyProperty, Integer> id;
+    private TableColumn<Vacancy, Integer> id;
     @FXML
-    private TableColumn<SimpleVacancyProperty, String> company;
+    private TableColumn<Vacancy, String> company;
     @FXML
-    private TableColumn<SimpleVacancyProperty, String> vacancy;
+    private TableColumn<Vacancy, String> vacancy;
     @FXML
-    private TableColumn<SimpleVacancyProperty, String> mail;
+    private TableColumn<Vacancy, String> mail;
     @FXML
-    private TableColumn<SimpleVacancyProperty, String> link;
+    private TableColumn<Vacancy, String> link;
     @FXML
-    private TableColumn<SimpleVacancyProperty, LocalDate> dateRequest;
+    private TableColumn<Vacancy, LocalDate> dateRequest;
     @FXML
-    private TableColumn<SimpleVacancyProperty, String> answer;
+    private TableColumn<Vacancy, String> answer;
     @FXML
-    private TableColumn<SimpleVacancyProperty, LocalDate> dateAnswer;
+    private TableColumn<Vacancy, LocalDate> dateAnswer;
 
     /**
      * Поля и кнопки фильтра.
@@ -67,7 +65,7 @@ public class ControllerVacanciesTable {
         CharSequence vhs = vacancy.subSequence(0, vacancy.length());
 
         //Фильтрация по полям "company" и "vacancy".
-        List<SimpleVacancyProperty> select = this.simpleVacancyProperties.
+        List<Vacancy> select = this.vacances.
                 stream().
                 filter(x -> x.getCompany().toLowerCase().contains(chs)).
                 filter(x -> x.getVacancy().toLowerCase().contains(vhs)).
@@ -95,14 +93,14 @@ public class ControllerVacanciesTable {
 
     /**
      * Метод заполняет таблицу результатами поиска и заново заполняет
-     * this.simpleVacancyProperties полным набором вакансий.
+     * this.vacances полным набором вакансий.
      *
      * @param list результат поиска
      * @throws DAOException
      */
-    private void resetSimpleVacancyProperties(List<SimpleVacancyProperty> list) throws DAOException {
-        this.simpleVacancyProperties.clear();
-        this.simpleVacancyProperties.addAll(list);
+    private void resetSimpleVacancyProperties(List<Vacancy> list) throws DAOException {
+        this.vacances.clear();
+        this.vacances.addAll(list);
         this.fillTable();
         this.setSimpleVacancyProperties();
     }
@@ -123,10 +121,10 @@ public class ControllerVacanciesTable {
     }
 
     /**
-     * Метод заполняет таблицу данными из this.simpleVacancyProperties.
+     * Метод заполняет таблицу данными из this.vacances.
      */
     private void fillTable() {
-        this.tableView.setItems(this.simpleVacancyProperties);
+        this.tableView.setItems(this.vacances);
         // определяем фабрику для столбца с привязкой к свойству id
         this.id.setCellValueFactory(new PropertyValueFactory<>("id"));
         // определяем фабрику для столбца с привязкой к свойству company
@@ -146,32 +144,32 @@ public class ControllerVacanciesTable {
     }
 
     /**
-     * Метод заполняет this.simpleVacancyProperties актуалными данными, обращается к
+     * Метод заполняет this.vacances актуалными данными, обращается к
      * базе.
      *
      * @throws DAOException
      */
     public void setSimpleVacancyProperties() throws DAOException {
-        this.simpleVacancyProperties = FXCollections.observableArrayList();
+        this.vacances = FXCollections.observableArrayList();
         this.vacancyManager.
                 getVacancies().
                 stream().
-                forEach(x -> this.simpleVacancyProperties.add(new SimpleVacancyProperty(x)));
+                forEach(x -> this.vacances.add(x));
     }
 
-    public ObservableList<SimpleVacancyProperty> getSimpleVacancyProperties() {
-        return this.simpleVacancyProperties;
+    public ObservableList<Vacancy> getSimpleVacancyProperties() {
+        return this.vacances;
     }
 
     /**
-     * Метод фильтрует List<SimpleVacancyProperty> по полю
+     * Метод фильтрует List<Vacancy> по полю
      * mail_date, отбирая значения больше и равные текущему
      * значению поля fromField
      *
      * @param select отфильтрованный по mail_date больше и
      *               равной fromField.
      */
-    private void selectBeforeMailDate(List<SimpleVacancyProperty> select) {
+    private void selectBeforeMailDate(List<Vacancy> select) {
         LocalDate to = this.toField.getValue();
         if (!this.toField.getEditor().getText().isEmpty()) {
             for (int i = 0; i < select.size(); i++) {
@@ -185,14 +183,14 @@ public class ControllerVacanciesTable {
     }
 
     /**
-     * Метод фильтрует List<SimpleVacancyProperty> по полю
+     * Метод фильтрует List<Vacancy> по полю
      * mail_date, отбирая значения меньшие и равные текущему
      * значению поля toField.
      *
      * @param select отфильтрованный по mail_date меньше и
      *               равной toField.
      */
-    private void selectAfterMailDate(List<SimpleVacancyProperty> select) {
+    private void selectAfterMailDate(List<Vacancy> select) {
         LocalDate from = this.fromField.getValue();
         if (!this.fromField.getEditor().getText().isEmpty()) {
             for (int i = 0; i < select.size(); i++) {
