@@ -61,26 +61,27 @@ public class DAO {
                 statement.setString(4, vacancy.getMail());
                 logger.info(vacancy.getMail());
                 /**дата отправки резюме*/
-                if (vacancy.getMail_date() == null) {
+                if (vacancy.getRequestDate() == null) {
                     statement.setDate(5, null);
                     logger.info("mail date : ");
                 } else {
                     java.sql.Date date = new java.sql.Date(
                             Convertor.convertLocalDateToDate(
-                                    vacancy.getMail_date()).
+                                    vacancy.getRequestDate()).
                                     getTime());
                     statement.setDate(5, date);
-                    logger.info(sDateForm.format(vacancy.getMail_date()));
+                    logger.info(sDateForm.format(
+                            Convertor.convertLocalDateToDate(vacancy.getRequestDate())));
                 }
                 /**текст сопроводительного письма*/
-                if (vacancy.getText() == null) statement.setString(6, null);
-                statement.setString(6, vacancy.getText());
-                logger.info(vacancy.getText());
+                if (vacancy.getMessage() == null) statement.setString(6, null);
+                statement.setString(6, vacancy.getMessage());
+                logger.info(vacancy.getMessage());
 
                 /**ссылка на вакансию*/
-                if (vacancy.getVacancy_linc() == null) statement.setString(7, null);
-                statement.setString(7, vacancy.getVacancy_linc());
-                logger.info(vacancy.getVacancy_linc());
+                if (vacancy.getLink() == null) statement.setString(7, null);
+                statement.setString(7, vacancy.getLink());
+                logger.info(vacancy.getLink());
 
                 int items = statement.executeUpdate();
                 logger.info(Integer.toString(items) + " items updated/inserted!");
@@ -190,40 +191,42 @@ public class DAO {
                 statement.setString(3, vacancy.getMail());
                 logger.info(vacancy.getMail());
                 /**дата отправки резюме*/
-                if (vacancy.getMail_date() == null) {
+                if (vacancy.getRequestDate() == null) {
                     statement.setDate(4, null);
                     logger.info("mail date : ");
                 } else {
                     java.sql.Date date = new java.sql.Date(
                             Convertor.convertLocalDateToDate(
-                                    vacancy.getMail_date()).
+                                    vacancy.getRequestDate()).
                                     getTime());
                     statement.setDate(4, date);
-                    logger.info(sDateForm.format(vacancy.getMail_date()));
+                    logger.info(sDateForm.format(
+                            Convertor.convertLocalDateToDate(vacancy.getRequestDate())));
                 }
                 /**текст сопроводительного письма*/
-                if (vacancy.getText() == null) statement.setString(5, null);
-                statement.setString(5, vacancy.getText());
-                logger.info(vacancy.getText());
+                if (vacancy.getMessage() == null) statement.setString(5, null);
+                statement.setString(5, vacancy.getMessage());
+                logger.info(vacancy.getMessage());
                 /**ответ*/
                 if (vacancy.getAnswer() == null) statement.setString(6, null);
                 statement.setString(6, vacancy.getAnswer());
                 logger.info(vacancy.getAnswer());
                 /**ссылка на вакансию*/
-                if (vacancy.getVacancy_linc() == null) statement.setString(7, null);
-                statement.setString(7, vacancy.getVacancy_linc());
-                logger.info(vacancy.getVacancy_linc());
+                if (vacancy.getLink() == null) statement.setString(7, null);
+                statement.setString(7, vacancy.getLink());
+                logger.info(vacancy.getLink());
                 /**дата ответа компании*/
-                if (vacancy.getAnswer_date() == null) {
+                if (vacancy.getReplayDate() == null) {
                     statement.setDate(8, null);
                     logger.info("answer date : ");
                 } else {
                     java.sql.Date date = new java.sql.Date(
                             Convertor.convertLocalDateToDate(
-                                    vacancy.getAnswer_date()).
+                                    vacancy.getReplayDate()).
                                     getTime());
                     statement.setDate(8, date);
-                    logger.info(sDateForm.format(vacancy.getAnswer_date()));
+                    logger.info(sDateForm.format(
+                            Convertor.convertLocalDateToDate(vacancy.getReplayDate())));
                 }
                 /**id вакансии*/
                 statement.setInt(9, vacancy.getId());
@@ -313,11 +316,11 @@ public class DAO {
                         /**дата ответа компании*/
                         Date answer_date = resultSet.getDate("answer_date");
                         vacancy = new Vacancy(id, company, vacancyName, mail, mail_date, text, vacancy_linc);
-                        if (answer != null) {
+                        if (answer != null ) {
                             vacancy.setAnswer(answer);
                         }
                         if (answer_date != null) {
-                            vacancy.setAnswer_date(Convertor.convertDateToLocalDate(answer_date));
+                            vacancy.setReplayDate(Convertor.convertDateToLocalDate(answer_date));
                         }
 
                         logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
@@ -371,10 +374,10 @@ public class DAO {
                             vacancy.setAnswer(answer);
                         }
                         if (answer_date != null) {
-                            vacancy.setAnswer_date(Convertor.convertDateToLocalDate(answer_date));
+                            vacancy.setReplayDate(Convertor.convertDateToLocalDate(answer_date));
                         }
                         vacancies.add(vacancy);
-                       // logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
+                        // logger.info(String.format("get vacancy with id %d !", vacancy.getId()));
                     }
                     this.vacancyManager.setVacancies(vacancies);
                 }

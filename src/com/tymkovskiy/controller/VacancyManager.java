@@ -63,20 +63,6 @@ public class VacancyManager {
     }
 
     /**
-     * @param vacancy
-     */
-    public void readVacancy(Vacancy vacancy) {
-        // TODO implement here ????????
-    }
-
-    /**
-     * @param string
-     */
-    public void findVacancy(String string) {
-        // TODO implement here ????????
-    }
-
-    /**
      * @param vacancies
      */
     public void setVacancies(List<Vacancy> vacancies) {
@@ -91,39 +77,6 @@ public class VacancyManager {
     public List<Vacancy> getVacancies() throws DAOException {
         this.base.getAllVacancies();
         return this.vacancies;
-    }
-
-    /**
-     * @param date
-     */
-    public List<Vacancy> getVacancies(Date date) throws DAOException {
-        this.base.getVacanciesByMailDate(date);
-        return this.vacancies;
-    }
-
-    /**
-     * @param company
-     */
-    public List<Vacancy> getVacancies(String company) throws DAOException {
-        this.base.getVacanciesByCompany(company);
-        return this.vacancies;
-    }
-
-    /**
-     * @param start
-     * @param end
-     */
-    public List<Vacancy> getVacancies(Date start, Date end) throws DAOException {
-        this.base.getVacanciesByMailDate(start, end);
-        return this.vacancies;
-    }
-
-    public Vacancy getVacancyById(int vacancyId) throws DAOException {
-        return this.base.getVacancyById(vacancyId);
-    }
-
-    public DAO getBase() {
-        return this.base;
     }
 
     private void setBase(DAO base) {

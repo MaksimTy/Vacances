@@ -1,12 +1,15 @@
 package com.tymkovskiy;
 
-import com.tymkovskiy.view.ControllerVacanciesTable;
-import com.tymkovskiy.view.ControllerVacancyCard;
+import com.tymkovskiy.dao.DAOException;
+import com.tymkovskiy.model.Vacancy;
+import com.tymkovskiy.view.VacancyEditDialogController;
+import com.tymkovskiy.view.VacancyOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,8 +19,7 @@ public class MainApp extends Application {
 
     private Stage stage;
     private BorderPane rootLayout;
-    private ControllerVacanciesTable controllerVacanciesTable;
-    private ControllerVacancyCard controllerVacancyCard;
+    private VacancyOverviewController vacancyOverviewController;
 
     public static void main(String[] args) {
         launch(args);
@@ -31,8 +33,6 @@ public class MainApp extends Application {
 
         this.initRootLayout();
         this.showVacancyOverview();
-       // this.showVacancyEditDialog();
-
     }
 
     public void initRootLayout() throws IOException {
@@ -50,13 +50,33 @@ public class MainApp extends Application {
         AnchorPane anchorPane = (AnchorPane) loader.load();
         this.rootLayout.setCenter(anchorPane);
 
+        this.vacancyOverviewController = loader.getController();
+        this.vacancyOverviewController.setMainApp(this);
+
     }
 
-    public void showVacancyEditDialog() throws IOException {
+    public void showVacancyEditDialog(Vacancy vacancy) throws IOException, DAOException {
+
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MainApp.class.getResource("../tymkovskiy/view/VacancyEditDialog.fxml"));
         AnchorPane anchorPane = (AnchorPane) loader.load();
-        this.rootLayout.setRight(anchorPane);
+        VacancyEditDialogController vacancyEditDialogController = loader.getController();
+        vacancyEditDialogController.setVacancyCurrent(vacancy);
 
-           }
+        Scene scene = new Scene(anchorPane);
+        Stage dialogStage = new Stage();
+        dialogStage.setScene(scene);
+
+        dialogStage.setTitle("Edit vacancy");
+        dialogStage.initOwner(this.stage);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+
+        vacancyEditDialogController.setDialogStage(dialogStage);
+        vacancyEditDialogController.setVacancyOverviewController(this.vacancyOverviewController);
+
+        dialogStage.showAndWait();
+        this.vacancyOverviewController.refreshTable();
+
+
+    }
 }

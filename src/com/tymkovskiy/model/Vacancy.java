@@ -1,11 +1,11 @@
 package com.tymkovskiy.model;
 
-import com.tymkovskiy.dao.DAO;
 import com.tymkovskiy.util.Convertor;
 import javafx.beans.property.*;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 /**
@@ -33,11 +33,11 @@ public class Vacancy {
     /**
      * дата отправки резюме
      */
-    private ObjectProperty<LocalDate> mail_date;
+    private ObjectProperty<LocalDate> requestDate;
     /**
      * текст сопроводительного письма
      */
-    private StringProperty text;
+    private StringProperty message;
     /**
      * ответ
      */
@@ -45,11 +45,11 @@ public class Vacancy {
     /**
      * ссылка на вакансию
      */
-    private StringProperty vacancy_linc;
+    private StringProperty link;
     /**
      * дата ответа компании
      */
-    private ObjectProperty<LocalDate> answer_date;
+    private ObjectProperty<LocalDate> replayDate;
 
 
     /**
@@ -59,9 +59,9 @@ public class Vacancy {
      * @param company      наименование компании
      * @param vacancy      электронный адрес компании
      * @param mail         электронный адрес компании
-     * @param mail_date    дата отправки резюме
-     * @param text         текст сопроводительного письма
-     * @param vacancy_linc ссылка на вакансию
+     * @param requestDate    дата отправки резюме
+     * @param message         текст сопроводительного письма
+     * @param link ссылка на вакансию
      */
 
     public Vacancy(
@@ -69,17 +69,20 @@ public class Vacancy {
             String company,
             String vacancy,
             String mail,
-            Date mail_date,
-            String text,
-            String vacancy_linc) {
+            Date requestDate,
+            String message,
+            String link) {
         this.id = new SimpleIntegerProperty(id);
         this.company = new SimpleStringProperty(company);
         this.vacancy = new SimpleStringProperty(vacancy);
         this.mail = new SimpleStringProperty(mail);
-        this.mail_date = new SimpleObjectProperty<LocalDate>(
-                Convertor.convertDateToLocalDate(mail_date));
-        this.text = new SimpleStringProperty(text);
-        this.vacancy_linc = new SimpleStringProperty(vacancy_linc);
+        this.requestDate = new SimpleObjectProperty<LocalDate>(
+                Convertor.convertDateToLocalDate(requestDate));
+        this.message = new SimpleStringProperty(message);
+        this.link = new SimpleStringProperty(link);
+
+        this.answer = new SimpleStringProperty();
+        this.replayDate = new SimpleObjectProperty<LocalDate>();
     }
 
     /**
@@ -88,24 +91,28 @@ public class Vacancy {
      * @param company      наименование компании
      * @param vacancy      электронный адрес компании
      * @param mail         электронный адрес компании
-     * @param mail_date    дата отправки резюме
-     * @param text         текст сопроводительного письма
-     * @param vacancy_linc ссылка на вакансию
+     * @param requestDate    дата отправки резюме
+     * @param message         текст сопроводительного письма
+     * @param link ссылка на вакансию
      */
     public Vacancy(
             String company,
             String vacancy,
             String mail,
-            Date mail_date,
-            String text,
-            String vacancy_linc) {
+            Date requestDate,
+            String message,
+            String link) {
         this.company = new SimpleStringProperty(company);
         this.vacancy = new SimpleStringProperty(vacancy);
         this.mail = new SimpleStringProperty(mail);
-        this.mail_date = new SimpleObjectProperty<LocalDate>(
-                Convertor.convertDateToLocalDate(mail_date));
-        this.text = new SimpleStringProperty(text);
-        this.vacancy_linc = new SimpleStringProperty(vacancy_linc);
+        this.requestDate = new SimpleObjectProperty<LocalDate>(
+                Convertor.convertDateToLocalDate(requestDate));
+        this.message = new SimpleStringProperty(message);
+        this.link = new SimpleStringProperty(link);
+
+        this.id = new SimpleIntegerProperty();
+        this.answer = new SimpleStringProperty();
+        this.replayDate = new SimpleObjectProperty<LocalDate>();
     }
 
 
@@ -157,28 +164,28 @@ public class Vacancy {
         this.mail.set(mail);
     }
 
-    public LocalDate getMail_date() {
-        return mail_date.get();
+    public LocalDate getRequestDate() {
+        return requestDate.get();
     }
 
-    public ObjectProperty<LocalDate> mail_dateProperty() {
-        return mail_date;
+    public ObjectProperty<LocalDate> requestDateProperty() {
+        return requestDate;
     }
 
-    public void setMail_date(LocalDate mail_date) {
-        this.mail_date.set(mail_date);
+    public void setRequestDate(LocalDate requestDate) {
+        this.requestDate.set(requestDate);
     }
 
-    public String getText() {
-        return text.get();
+    public String getMessage() {
+        return message.get();
     }
 
-    public StringProperty textProperty() {
-        return text;
+    public StringProperty messageProperty() {
+        return message;
     }
 
-    public void setText(String text) {
-        this.text.set(text);
+    public void setMessage(String message) {
+        this.message.set(message);
     }
 
     public String getAnswer() {
@@ -193,28 +200,28 @@ public class Vacancy {
         this.answer.set(answer);
     }
 
-    public String getVacancy_linc() {
-        return vacancy_linc.get();
+    public String getLink() {
+        return link.get();
     }
 
-    public StringProperty vacancy_lincProperty() {
-        return vacancy_linc;
+    public StringProperty linkProperty() {
+        return link;
     }
 
-    public void setVacancy_linc(String vacancy_linc) {
-        this.vacancy_linc.set(vacancy_linc);
+    public void setLink(String link) {
+        this.link.set(link);
     }
 
-    public LocalDate getAnswer_date() {
-        return answer_date.get();
+    public LocalDate getReplayDate() {
+        return replayDate.get();
     }
 
-    public ObjectProperty<LocalDate> answer_dateProperty() {
-        return answer_date;
+    public ObjectProperty<LocalDate> replayDateProperty() {
+        return replayDate;
     }
 
-    public void setAnswer_date(LocalDate answer_date) {
-        this.answer_date.set(answer_date);
+    public void setReplayDate(LocalDate replayDate) {
+        this.replayDate.set(replayDate);
     }
 
     @Override
@@ -224,11 +231,11 @@ public class Vacancy {
                 ", company='" + company + '\'' +
                 ", vacancy='" + vacancy + '\'' +
                 ", mail='" + mail + '\'' +
-                ", mail_date=" + mail_date +
+                ", mail_date=" + requestDate +
                 //  ", text='" + text + '\'' +
                 ", answer='" + answer + '\'' +
-                ", vacancy_linc='" + vacancy_linc + '\'' +
-                ", answer_date=" + answer_date +
+                ", vacancy_linc='" + link + '\'' +
+                ", answer_date=" + replayDate +
                 '}';
     }
 
