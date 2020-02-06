@@ -7,9 +7,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.tymkovskiy.view.VacancyOverviewController">
+            fx:controller="com.tymkovskiy.view.VacancyEditDialogController"
+            stylesheets="@/com/tymkovskiy/css/style.css">
     <children>
         <VBox layoutX="5.0" layoutY="5.0" spacing="5.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0"
               AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
@@ -35,7 +35,7 @@
                             </rowConstraints>
                             <children>
                                 <Label text="id"/>
-                                <Label text="Label" GridPane.columnIndex="1"/>
+                                <Label fx:id="id" text="_____" GridPane.columnIndex="1"/>
                                 <Label text="company" GridPane.rowIndex="1"/>
                                 <Label text="vacancy" GridPane.rowIndex="2"/>
                                 <Label text="mail" GridPane.rowIndex="3"/>
@@ -43,26 +43,26 @@
                                 <Label text="request" GridPane.rowIndex="5"/>
                                 <Label text="replay" GridPane.rowIndex="6"/>
                                 <Label text="answer" GridPane.rowIndex="7"/>
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="2"/>
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="3"/>
-                                <TextField GridPane.columnIndex="1" GridPane.rowIndex="4"/>
-                                <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-                                <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6"/>
-                                <ComboBox prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1"
+                                <TextField fx:id="company" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                                <TextField fx:id="vacancy" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                                <TextField fx:id="mail" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                                <TextField fx:id="link" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                                <DatePicker fx:id="request" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                                <DatePicker fx:id="replay" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                                <ComboBox fx:id="answer" prefHeight="25.0" prefWidth="175.0" GridPane.columnIndex="1"
                                           GridPane.rowIndex="7"/>
                             </children>
                         </GridPane>
                         <Label text="message"/>
-                        <TextArea promptText="message"/>
+                        <TextArea fx:id="message" promptText="message"/>
                     </children>
                 </VBox>
                 <HBox alignment="TOP_RIGHT" spacing="10.0" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                     <children>
                         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="100.0"
-                                text="OK"/>
+                                text="OK" onAction="#setOkButtonClick"/>
                         <Button minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefWidth="100.0"
-                                text="Cansel"/>
+                                text="Cancel" onAction="#setCancelButtonClick"/>
                     </children>
                 </HBox>
             </children>
